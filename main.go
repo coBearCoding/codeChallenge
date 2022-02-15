@@ -2,6 +2,7 @@ package main
 
 import (
 	"codeChallenge/config"
+	"log"
 	"net/http"
 )
 
@@ -11,5 +12,5 @@ func main() {
 		Addr: serverConfig.Addr,
 		Handler: serverConfig.Handler,
 	}
-	server.ListenAndServe()
+	log.Fatal(server.ListenAndServe())
 }

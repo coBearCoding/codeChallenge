@@ -3,6 +3,7 @@ package handlers
 import (
 	"codeChallenge/helper"
 	"encoding/json"
+	"errors"
 	"net/http"
 )
 
@@ -17,6 +18,7 @@ func Index(w http.ResponseWriter, r *http.Request) {
 	for decoder.More() {
 		err := decoder.Decode(&textStruct)
 		if err != nil {
+			err = errors.New("tipo de dato incorrecto")
 			helper.SendError(w, err.Error())
 		}
 		for _, text := range textStruct.Text {

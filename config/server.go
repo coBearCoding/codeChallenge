@@ -7,17 +7,18 @@ import (
 )
 
 type Server struct {
-	Addr string
+	Addr    string
 	Handler http.Handler
 }
 
-func LoadConfig () Server{
+func LoadConfig() Server {
 	router := mux.NewRouter()
 
-	router.HandleFunc("/api", handlers.Index).Methods("POST")
+	router.HandleFunc("/api", handlers.Index).Methods(http.MethodPost, http.MethodOptions)
+	router.Use(mux.CORSMethodMiddleware(router))
 
 	serverConfig := Server{
-		Addr: ":3030",
+		Addr:    ":3030",
 		Handler: router,
 	}
 
